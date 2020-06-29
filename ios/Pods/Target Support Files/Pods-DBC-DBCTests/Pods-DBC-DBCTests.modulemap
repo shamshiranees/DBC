@@ -1,0 +1,6 @@
+module Pods_DBC_DBCTests {
+  umbrella header "Pods-DBC-DBCTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

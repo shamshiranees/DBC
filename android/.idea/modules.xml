@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DBC.iml" filepath="$PROJECT_DIR$/.idea/modules/DBC.iml" group="DBC" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="DBC/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/430100884/react-native-community_async-storage.iml" filepath="$PROJECT_DIR$/.idea/modules/430100884/react-native-community_async-storage.iml" group="DBC/react-native-community_async-storage" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1864399471/react-native-community_masked-view.iml" filepath="$PROJECT_DIR$/.idea/modules/-1864399471/react-native-community_masked-view.iml" group="DBC/react-native-community_masked-view" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/167941408/react-native-document-picker.iml" filepath="$PROJECT_DIR$/.idea/modules/167941408/react-native-document-picker.iml" group="DBC/react-native-document-picker" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/510822435/react-native-file-viewer.iml" filepath="$PROJECT_DIR$/.idea/modules/510822435/react-native-file-viewer.iml" group="DBC/react-native-file-viewer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/411899629/react-native-fs.iml" filepath="$PROJECT_DIR$/.idea/modules/411899629/react-native-fs.iml" group="DBC/react-native-fs" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1263661158/react-native-gesture-handler.iml" filepath="$PROJECT_DIR$/.idea/modules/1263661158/react-native-gesture-handler.iml" group="DBC/react-native-gesture-handler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-868559776/react-native-image-picker.iml" filepath="$PROJECT_DIR$/.idea/modules/-868559776/react-native-image-picker.iml" group="DBC/react-native-image-picker" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/963347958/react-native-reanimated.iml" filepath="$PROJECT_DIR$/.idea/modules/963347958/react-native-reanimated.iml" group="DBC/react-native-reanimated" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-446003377/react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/-446003377/react-native-safe-area-context.iml" group="DBC/react-native-safe-area-context" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1369903577/react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/-1369903577/react-native-screens.iml" group="DBC/react-native-screens" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/756707632/react-native-vector-icons.iml" filepath="$PROJECT_DIR$/.idea/modules/756707632/react-native-vector-icons.iml" group="DBC/react-native-vector-icons" />
+    </modules>
+  </component>
+</project>

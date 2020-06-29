@@ -1,0 +1,141 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.dbc"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+9        android:targetSdkVersion="28" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->/Users/redux/Documents/DBC-master/android/app/src/debug/AndroidManifest.xml:5:5-77
+11-->/Users/redux/Documents/DBC-master/android/app/src/debug/AndroidManifest.xml:5:22-75
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:5:5-67
+12-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:5:22-64
+13    <uses-permission android:name="android.permission.CAMERA" />
+13-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:6:1-60
+13-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:6:18-58
+14    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+14-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:7:1-76
+14-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:7:18-74
+15    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+15-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:8:1-75
+15-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:8:18-73
+16    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+16-->[com.facebook.flipper:flipper:0.33.1] /Users/redux/.gradle/caches/transforms-2/files-2.1/80894f374c9902dcfd7a3d6ed2393f5e/jetified-flipper-0.33.1/AndroidManifest.xml:16:5-76
+16-->[com.facebook.flipper:flipper:0.33.1] /Users/redux/.gradle/caches/transforms-2/files-2.1/80894f374c9902dcfd7a3d6ed2393f5e/jetified-flipper-0.33.1/AndroidManifest.xml:16:22-73
+17
+18    <application
+18-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:10:5-55:19
+19        android:name="com.dbc.MainApplication"
+19-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:11:7-38
+20        android:allowBackup="false"
+20-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:14:7-34
+21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+21-->[androidx.core:core:1.1.0] /Users/redux/.gradle/caches/transforms-2/files-2.1/4f509a65121478d6153615d7ef5b7c5f/core-1.1.0/AndroidManifest.xml:24:18-86
+22        android:debuggable="true"
+23        android:icon="@mipmap/ic_launcher"
+23-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:13:7-41
+24        android:label="@string/app_name"
+24-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:12:7-39
+25        android:testOnly="true"
+26        android:theme="@style/AppTheme"
+26-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:15:7-38
+27        android:usesCleartextTraffic="true" >
+27-->/Users/redux/Documents/DBC-master/android/app/src/debug/AndroidManifest.xml:7:18-53
+28        <provider
+29            android:name="com.vinzscam.reactnativefileviewer.FileProvider"
+30            android:authorities="com.dbc.provider"
+31            android:exported="false"
+32            android:grantUriPermissions="true" >
+33            <meta-data
+34                android:name="android.support.FILE_PROVIDER_PATHS"
+35                android:resource="@xml/file_viewer_provider_paths" />
+36        </provider>
+37
+38        <activity
+38-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:26:7-53:18
+39            android:name="com.dbc.MainActivity"
+39-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:27:9-37
+40            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+40-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:29:9-86
+41            android:label="@string/app_name"
+41-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:28:9-41
+42            android:launchMode="singleTask"
+42-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:30:9-40
+43            android:windowSoftInputMode="adjustResize" >
+43-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:31:9-51
+44            <intent-filter>
+44-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:32:9-35:25
+45                <action android:name="android.intent.action.MAIN" />
+45-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:33:13-65
+45-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:33:21-62
+46
+47                <category android:name="android.intent.category.LAUNCHER" />
+47-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:34:13-73
+47-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:34:23-70
+48            </intent-filter>
+49            <intent-filter
+49-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:38:11-51:23
+50                android:icon="@mipmap/ic_launcher"
+50-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:39:11-45
+51                android:label="DBC" >
+51-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:40:11-30
+52                <action android:name="android.intent.action.VIEW" />
+52-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:42:11-63
+52-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:42:19-60
+53                <action android:name="android.intent.action.EDIT" />
+53-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:43:11-63
+53-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:43:19-60
+54
+55                <category android:name="android.intent.category.DEFAULT" />
+55-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:44:11-70
+55-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:44:21-67
+56
+57                <data
+57-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:45:11-50:17
+58                    android:host="*"
+58-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:48:15-31
+59                    android:mimeType="*/*"
+59-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:47:15-37
+60                    android:scheme="content" />
+60-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:46:15-39
+61            </intent-filter>
+62        </activity>
+63        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+63-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:54:7-84
+63-->/Users/redux/Documents/DBC-master/android/app/src/main/AndroidManifest.xml:54:17-81
+64
+65        <provider
+65-->[:react-native-image-picker] /Users/redux/Documents/DBC-master/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:10:9-18:20
+66            android:name="com.imagepicker.FileProvider"
+66-->[:react-native-image-picker] /Users/redux/Documents/DBC-master/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-56
+67            android:authorities="com.dbc.provider"
+67-->[:react-native-image-picker] /Users/redux/Documents/DBC-master/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:13-60
+68            android:exported="false"
+68-->[:react-native-image-picker] /Users/redux/Documents/DBC-master/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-37
+69            android:grantUriPermissions="true" >
+69-->[:react-native-image-picker] /Users/redux/Documents/DBC-master/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:13-47
+70            <meta-data
+71                android:name="android.support.FILE_PROVIDER_PATHS"
+72                android:resource="@xml/provider_paths" />
+73        </provider>
+74        <provider
+74-->[:react-native-share] /Users/redux/Documents/DBC-master/node_modules/react-native-share/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:9-20:20
+75            android:name="cl.json.RNShareFileProvider"
+75-->[:react-native-share] /Users/redux/Documents/DBC-master/node_modules/react-native-share/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-55
+76            android:authorities="com.dbc.rnshare.fileprovider"
+76-->[:react-native-share] /Users/redux/Documents/DBC-master/node_modules/react-native-share/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:13-72
+77            android:exported="false"
+77-->[:react-native-share] /Users/redux/Documents/DBC-master/node_modules/react-native-share/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:13-37
+78            android:grantUriPermissions="true" >
+78-->[:react-native-share] /Users/redux/Documents/DBC-master/node_modules/react-native-share/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:13-47
+79            <meta-data
+80                android:name="android.support.FILE_PROVIDER_PATHS"
+81                android:resource="@xml/share_download_paths" />
+82        </provider>
+83    </application>
+84
+85</manifest>

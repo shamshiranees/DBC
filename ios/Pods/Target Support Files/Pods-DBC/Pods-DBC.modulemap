@@ -1,0 +1,6 @@
+module Pods_DBC {
+  umbrella header "Pods-DBC-umbrella.h"
+
+  export *
+  module * { export * }
+}
