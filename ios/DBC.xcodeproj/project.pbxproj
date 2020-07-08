@@ -19,6 +19,7 @@
 		381DE7A1A4CE291D1981287D /* libPods-DBC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BED47CD16A420DEB201F536B /* libPods-DBC.a */; };
 		6FA86B969184E1DBEC78E2A0 /* libPods-DBC-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D3F0C1AAC407D84F4B9246 /* libPods-DBC-tvOS.a */; };
 		84067B0F973EEAAA884C3C6E /* libPods-DBC-DBCTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4E8AEB71D433A1D61A53A5 /* libPods-DBC-DBCTests.a */; };
+		C3A304F424AA0AA200B07B64 /* Gotham Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C3A304F324AA0AA200B07B64 /* Gotham Medium.otf */; };
 		FE21DFD2A25D9F2CD8DDC955 /* libPods-DBC-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF8905C1D85BF388053B486B /* libPods-DBC-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		A15AC95A12669941A21FFE8E /* Pods-DBC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBC.release.xcconfig"; path = "Target Support Files/Pods-DBC/Pods-DBC.release.xcconfig"; sourceTree = "<group>"; };
 		ABBCA3FA58F93BC4C8AB5C9C /* Pods-DBC-DBCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBC-DBCTests.release.xcconfig"; path = "Target Support Files/Pods-DBC-DBCTests/Pods-DBC-DBCTests.release.xcconfig"; sourceTree = "<group>"; };
 		BED47CD16A420DEB201F536B /* libPods-DBC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DBC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3A304F324AA0AA200B07B64 /* Gotham Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham Medium.otf"; sourceTree = "<group>"; };
 		C6D0E68B65124128A11F0338 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		CE4E8AEB71D433A1D61A53A5 /* libPods-DBC-DBCTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DBC-DBCTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF8905C1D85BF388053B486B /* libPods-DBC-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DBC-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +188,7 @@
 				4379670EA14242EA8AF68BF7 /* AntDesign.ttf */,
 				4293984383564FA4AE935945 /* Entypo.ttf */,
 				33D965D63B124CD7AA2F1EBD /* EvilIcons.ttf */,
+				C3A304F324AA0AA200B07B64 /* Gotham Medium.otf */,
 				5880DB3AF2B2490DA21967C2 /* Feather.ttf */,
 				C6D0E68B65124128A11F0338 /* FontAwesome.ttf */,
 				1AA7AD83BE5E4635BD40DDFC /* FontAwesome5_Brands.ttf */,
@@ -383,6 +386,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				C3A304F424AA0AA200B07B64 /* Gotham Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,7 +420,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		1CFE0743CDDF8FA7CB6CADE9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

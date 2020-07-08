@@ -3,9 +3,12 @@ const INITIAL_STATE = {
   newFileImport: '',
   contactDetails: {
     id: '',
-    name: '',
+    firstName: '',
+    lastName: '',
+    phoneNumber:'',
     subtitle: '',
     designation: '',
+    favorited:false,
     myTeam: false,
     image: '',
     quotation: '',
@@ -14,10 +17,13 @@ const INITIAL_STATE = {
   },
   contactDetail: {
     id: '',
-    name: '',
+    firstName: '',
+    lastName: '',
+    phoneNumber:'',
     subtitle: '',
     designation: '',
     myTeam: false,
+    favorited:false,
     businessCards: [],
     quotations: [],
     invoices: [],
@@ -35,7 +41,7 @@ export default function(state = INITIAL_STATE, action) {
       return {...state, newFileImport: action.payload};
     case 'SET_CONTACT_DETAILS':
 
-    console.log("return",{...state, contactDetail: action.payload});
+     console.log("return", action.payload);
     
       return {...state, contactDetail: action.payload};
     case 'SET_URL_DETAILS':

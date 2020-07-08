@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {View, Text, FlatList, Image, StyleSheet} from 'react-native';
 import {Header, ListItem, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Colors} from '../../Theme';
+import {Colors, HelperStyles} from '../../Theme';
+import { CustomGridView } from '../Home/ContactDetail';
 
 function Document(props) {
   const list = [
@@ -36,10 +37,13 @@ function Document(props) {
     <View style={styles.container}>
       <Header
         backgroundColor={Colors.primary}
-        centerComponent={{text: 'Document', style: {color: '#fff'}}}
+        centerComponent={<Text style={HelperStyles.headerTitle}>Document</Text>}
+        // centerComponent={{text: 'Document', style: {color: '#fff'}}}
         // rightComponent={{icon: 'Document', color: '#fff'}}
       />
-      <FlatList
+
+      <CustomGridView onPress={onItemTap}/>
+      {/* <FlatList
         data={list}
         bounces={false}
         renderItem={({item}) => (
@@ -49,7 +53,7 @@ function Document(props) {
             title={item.name}
             // subtitle={item.subtitle}
             leftAvatar={
-              <Icon name="file-pdf-o" size={30} />
+              <Image style={styles.pdfBg} source={require('../../Assets/pdfIcon.jpeg')}/>
               // <Image
               //   source={require('../../Assets/placeholder.jpeg')}
               //   style={styles.avatar}
@@ -59,7 +63,7 @@ function Document(props) {
           />
         )}
         keyExtractor={item => item.id}
-      />
+      /> */}
       {/* <Button
         buttonStyle={styles.button}
         icon={<Icon name="plus" size={25} color="white" />}
@@ -95,5 +99,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 15,
     right: 15,
-  },
+  },  pdfBg: {
+    height: 50,
+    width: 40,}
 });

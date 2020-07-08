@@ -14,6 +14,8 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/../node_modules/@react-native-community/async-storage/android" />
             <option value="$PROJECT_DIR$/../node_modules/@react-native-community/masked-view/android" />
+            <option value="$PROJECT_DIR$/../node_modules/react-native-calendar-events/android" />
+            <option value="$PROJECT_DIR$/../node_modules/react-native-cardview/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-document-picker/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-file-viewer/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-fs/android" />
@@ -22,6 +24,7 @@
             <option value="$PROJECT_DIR$/../node_modules/react-native-reanimated/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-safe-area-context/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-screens/android" />
+            <option value="$PROJECT_DIR$/../node_modules/react-native-share/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-vector-icons/android" />
           </set>
         </option>

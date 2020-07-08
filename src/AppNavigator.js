@@ -25,6 +25,8 @@ import {isFileValid} from './Utils/Validator';
 import ContactDetail from './Containers/Home/ContactDetail';
 import AddDocuments from './Containers/Documents/AddDocuments';
 import Favorities from './Containers/Favorites/Favorities';
+import RNCalendarEvents from 'react-native-calendar-events';
+import ContactDocumentsList from './Containers/Home/ContactDocumentsList';
 const Stack = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
@@ -49,7 +51,7 @@ function TabBarItems(props) {
           }
 
           // You can return any component that you like here!
-          return <Icon name={iconName} size={size} color={focused?Colors.black:Colors.grey} />;
+          return <Icon name={iconName} size={20} color={focused?Colors.black:Colors.grey} />;
         },
       })}
       tabBarOptions={{
@@ -74,11 +76,13 @@ function AppNavigator() {
   const dbcStore = useSelector(cont => cont);
   const dispatch = useDispatch();
   useEffect(() => {
+
     AppState.addEventListener('change', _handleAppStateChange);
 
     return () => {
       AppState.removeEventListener('change', _handleAppStateChange);
     };
+
   }, []);
 
   const _handleAppStateChange = nextAppState => {
@@ -165,6 +169,10 @@ function AppNavigator() {
           <Stack.Screen name="documentDetail" component={DocumentDetail} />
           <Stack.Screen name="contactDetail" component={ContactDetail} />
           <Stack.Screen name="addDocument" component={AddDocuments} />
+          <Stack.Screen name="ContactDocumentsList" component={ContactDocumentsList} />
+
+
+          
         </Stack.Navigator>
       )}
     </NavigationContainer>

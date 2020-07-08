@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import com.calendarevents.CalendarEventsPackage;
 import com.facebook.react.ReactActivity;
 
 
@@ -48,7 +50,11 @@ public class MainActivity extends ReactActivity {
     }
   }
 
-
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    CalendarEventsPackage.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+  }
   @Override
   protected void onResume() {
     super.onResume();

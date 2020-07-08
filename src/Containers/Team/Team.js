@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {View, Text, FlatList, Image, StyleSheet, Platform} from 'react-native';
 import {Header, ListItem, Button, Avatar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Colors} from '../../Theme';
+import {Colors, HelperStyles} from '../../Theme';
 import {useDispatch, useSelector} from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import RNFS from 'react-native-fs';
@@ -72,7 +72,9 @@ function Team(props) {
       <Header
         backgroundColor={Colors.primary}
         // leftComponent={{icon: 'menu', color: '#fff'}}
-        centerComponent={{text: 'My Team', style: {color: '#fff'}}}
+        centerComponent={<Text style={HelperStyles.headerTitle}>My Team</Text>}
+
+        // centerComponent={{text: 'My Team', style: {color: '#fff'}}}
         // rightComponent={{icon: 'Team', color: '#fff'}}
       />
       <SearchBar
@@ -98,7 +100,7 @@ function Team(props) {
               roundAvatar
               onPress={() => onItemTap(item)}
               onLongPress={() => _onOpenActionSheet(item)}
-              title={item.name}
+              title={item.firstName +" "+ item.lastName}
               titleStyle={styles.title}
               subtitle={item.subtitle}
               subtitleStyle={styles.subtitle}
@@ -113,7 +115,7 @@ function Team(props) {
                     marginLeft: 0,
                   }}
                   rounded
-                  title={getNameId(item.name)}
+                  title={getNameId(item.firstName + " " + item.lastName)}
                 />
               }
               //  bottomDivider

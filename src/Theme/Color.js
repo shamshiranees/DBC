@@ -3,9 +3,9 @@ export default {
   black: '#000000',
   limegreen: '#32CD32',
   grey: '#808080',
-  blue: '#1E62A9',
+  blue: '#09A0DB',
   red: '#bc2b27',
-  primary: '#5D9333',
-  secondary: '#489ED7',
+  primary: '#4A961D',
+  secondary: '#0B8FB7',
   darkGrey:"#6A7A89"
 };

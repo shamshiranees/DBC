@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {View, Text, FlatList, Image, StyleSheet, Linking} from 'react-native';
 import {Header, ListItem, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Colors} from '../../Theme';
+import {Colors, HelperStyles} from '../../Theme';
 import Share from 'react-native-share';
 
 function More(props) {
@@ -13,6 +13,13 @@ function More(props) {
     'FAQ',
     'Developer contact',
     'Feature request mail',
+  ]; 
+  const listIcon = [
+    'share-alt',
+    'info-circle',
+    'question-circle',
+    'user',
+    'envelope',
   ];
   const OnItemTap = index => {
     switch (index) {
@@ -54,7 +61,9 @@ function More(props) {
       <Header
         backgroundColor={Colors.primary}
         // leftComponent={{icon: 'menu', color: '#fff'}}
-        centerComponent={{text: 'More', style: {color: '#fff'}}}
+        centerComponent={<Text style={HelperStyles.headerTitle}>More</Text>}
+        
+        
         // rightComponent={{icon: 'More', color: '#fff'}}
       />
       <FlatList
@@ -65,7 +74,9 @@ function More(props) {
             roundAvatar
             onPress={() => OnItemTap(index)}
             title={item}
+            titleStyle={{fontWeight:'bold'}}
             bottomDivider
+            leftAvatar={<Icon name={listIcon[index]} size={15} color={Colors.black}/>}
           />
         )}
         keyExtractor={({item, index}) => index}

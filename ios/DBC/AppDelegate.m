@@ -43,6 +43,14 @@ static void InitializeFlipper(UIApplication *application) {
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  for (NSString *family in UIFont.familyNames)
+  {
+
+   
+        NSLog (@"%@ %d", family);
+    // do stuff...
+  }
   return YES;
 }
 

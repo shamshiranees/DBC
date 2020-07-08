@@ -19,7 +19,7 @@ import {
   CheckBox,
   Card,
 } from 'react-native-elements';
-import {Colors} from '../../Theme';
+import {Colors, HelperStyles} from '../../Theme';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DocumentPicker from 'react-native-document-picker';
 import Color from '../../Theme/Color';
@@ -37,6 +37,7 @@ import moment from 'moment';
 import {isFileValid} from '../../Utils/Validator';
 import ActionSheet from 'react-native-actionsheet';
 import CardView from 'react-native-cardview';
+import { updateContact } from '../../Utils/LocalStorage';
 
 function addContact(props) {
   const isEdit = props.route.params ? props.route.params.isEdit : false;
@@ -156,21 +157,30 @@ function addContact(props) {
           }/org.reactjs.native.shamshir.DBC-Inbox/`
         : `${RNFS.DocumentDirectoryPath}`;
 
-    // if (isEdit) {
-    //   const jsonValue = dbcStore.contactDetails;
-    //   var allContacts = dbcStore.contacts;
-    //   for (var i = 0; i < allContacts.length; i++) {
-    //     let item = allContacts[i];
-    //     if (item.id === jsonValue.id) {
-    //       allContacts[i] = dbcStore.contactDetails;
-    //     }
-    //   }
-    //   console.log('allcontacts', allContacts);
+     if (isEdit) {
+       console.log("iseditttt trueeee");
+       
+      const jsonValue = dbcStore.contactDetail;
+      //  updateContact(jsonValue.id,jsonValue)
+      // const jsonValue = dbcStore.contactDetails;
+      var allContacts = dbcStore.contacts;
+      
+      for (var i = 0; i < allContacts.length; i++) {
+        let item = allContacts[i];
+       
+        if (item.id === jsonValue.id) {
+          
+          
+          allContacts[i] = jsonValue;
+        }
+      }
+   console.log("allcontacts",allContacts);
+   
 
-    //   AsyncStorage.setItem('allContacts', JSON.stringify(allContacts));
-    //   dispatch(setContact(JSON.parse(JSON.stringify(allContacts))));
-    //   return props.navigation.goBack();
-    // }
+     AsyncStorage.setItem('allContacts', JSON.stringify(allContacts));
+       dispatch(setContact(JSON.parse(JSON.stringify(allContacts))));
+       return props.navigation.goBack();
+     }
     if (dbcStore.contactDetail.businessCards.length > 0) {
       for (var i = 0; i < dbcStore.contactDetail.businessCards.length; i++) {
         const item = dbcStore.contactDetail.businessCards[i];
@@ -247,11 +257,12 @@ function addContact(props) {
       })
       .catch(err => {
         console.log(err.message);
-        alert(err.message);
+        saveContact()
+        // alert(err.message);
       });
   };
   return (
-    <View>
+    <View style={{height:'100%',backgroundColor:Colors.white}}>
       <Header
         backgroundColor={Colors.primary}
         leftComponent={{
@@ -260,11 +271,11 @@ function addContact(props) {
           size: 40,
           onPress: () => props.navigation.goBack(),
         }}
-        centerComponent={{
-          text: 'AddConatct',
-          style: {color: Colors.white, fontWeight: 'bold'},
-        }}
-        // rightComponent={{icon: 'done', color: Colors.white}}
+        
+        centerComponent={<Text style={HelperStyles.headerTitle}>AddConatct</Text>}
+        rightComponent={<Text onPress={()=>saveContact()} style={HelperStyles.headerTitle}>Done</Text>}
+
+        //  rightComponent={{icon: 'done', color: Colors.white}}
       />
 
       <ScrollView style={styles.scrollView} bounces={false}>
@@ -272,16 +283,30 @@ function addContact(props) {
           <Input
             labelStyle={styles.label}
             inputContainerStyle={styles.inputContainer}
-            label="Full Name"
+            label="First Name"
             onChangeText={value =>
               dispatch(
                 setContactDetails({
                   ...dbcStore.contactDetail,
-                  name: value,
+                  firstName: value,
                 }),
               )
             }
-            value={dbcStore.contactDetail.name}
+            value={dbcStore.contactDetail.firstName}
+          />
+            <Input
+            labelStyle={styles.label}
+            inputContainerStyle={styles.inputContainer}
+            label="Last Name"
+            onChangeText={value =>
+              dispatch(
+                setContactDetails({
+                  ...dbcStore.contactDetail,
+                  lastName: value,
+                }),
+              )
+            }
+            value={dbcStore.contactDetail.lastName}
           />
           <Input
             labelStyle={styles.label}
@@ -297,20 +322,21 @@ function addContact(props) {
             }
             value={dbcStore.contactDetail.subtitle}
           />
-          <CheckBox
-            containerStyle={styles.checkbox}
-            title="My team"
-            checked={dbcStore.contactDetail.myTeam}
-            onPress={() =>
-              dispatch(
-                setContactDetails({
-                  ...dbcStore.contactDetail,
-                  myTeam: !dbcStore.contactDetail.myTeam,
-                }),
-              )
-            }
-          />
-          {dbcStore.contactDetail.myTeam && (
+          <Input
+              labelStyle={styles.label}
+              inputContainerStyle={styles.inputDescriptionContainer}
+              label="Phone Number"
+              onChangeText={value =>
+                dispatch(
+                  setContactDetails({
+                    ...dbcStore.contactDetail,
+                    phoneNumber: value,
+                  }),
+                )
+              }
+              value={dbcStore.contactDetail.phoneNumber}
+            />
+          
             <Input
               labelStyle={styles.label}
               inputContainerStyle={styles.inputDescriptionContainer}
@@ -325,7 +351,20 @@ function addContact(props) {
               }
               value={dbcStore.contactDetail.designation}
             />
-          )}
+             <CheckBox
+            containerStyle={styles.checkbox}
+            title="My team"
+            checked={dbcStore.contactDetail.myTeam}
+            onPress={() =>
+              dispatch(
+                setContactDetails({
+                  ...dbcStore.contactDetail,
+                  myTeam: !dbcStore.contactDetail.myTeam,
+                }),
+              )
+            }
+          />
+        
           <CustomFlatList
             title="Business Cards"
             items={dbcStore.contactDetail.businessCards}
@@ -360,7 +399,7 @@ function addContact(props) {
           />
         </View>
       </ScrollView>
-      <Button title="Save" buttonStyle={styles.savBtn} onPress={saveContact} />
+      {/* <Button title="Save" buttonStyle={styles.savBtn} onPress={saveContact} /> */}
     </View>
   );
 }
@@ -415,10 +454,11 @@ function CustomFlatList({title, items, id, selectFile, removeFile, isEdit}) {
         title={title}
         leftAvatar={
           <Icon
+          onPress={() => selectFile(title)}
           style={{zIndex:999}}
             name={"plus-circle"}
             size={25}
-            color={Colors.secondary}
+            color={Colors.white}
           />
          }
         // rightAvatar={<Icon name={'share'} size={15} color={Colors.white} />}
@@ -435,6 +475,7 @@ function CustomFlatList({title, items, id, selectFile, removeFile, isEdit}) {
           bounces={false}
           renderItem={({item}) => (
 
+            
 
             <ListItem
             containerStyle={{ height: 80 }}
@@ -443,8 +484,8 @@ function CustomFlatList({title, items, id, selectFile, removeFile, isEdit}) {
            titleStyle={styles.pdfName}
            subtitle={"20/05/2020"}
            subtitleStyle={styles.pdfDate}
-           rightAvatar={<><Icon name={'bell'} size={10} color={Colors.grey} />
-           <Text style={{fontSize:10,color:Colors.grey,marginLeft:3}}>Reminder</Text></>}
+          //  rightAvatar={<><Icon name={'bell'} size={10} color={Colors.grey} />
+          //  <Text style={{fontSize:10,color:Colors.grey,marginLeft:3}}>Reminder</Text></>}
            leftAvatar={
              <View style={{flexDirection:'column'}}>
              <Image style={styles.pdfBg} source={require('../../Assets/pdfIcon.jpeg')}/>
@@ -496,9 +537,9 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height - 155,
   },
   label: {
-    height: 30,
-    fontSize: 17,
-    color: Colors.black,
+    // height: 30,
+    fontSize: 12,
+    color: Colors.grey,
   },
   inputContainer: {
     borderRadius: 6,
@@ -528,14 +569,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   header: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.secondary,
     padding:5,
     // width: '100%',
     // height: 30,
     // marginBottom:-20,
     color: 'white',
   },
-  headerTitle: {color: Colors.black,backgroundColor:'#ddd', fontSize: 13, fontWeight: 'bold',paddingLeft:20,marginLeft:-22,zIndex:2,marginTop:-2},
+  headerTitle: {color: Colors.white, fontSize: 13, fontWeight: 'bold',marginLeft:10},
  card: {
     margin: 15
     // borderRadius: 15,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {View, Text, FlatList, Image, StyleSheet, Platform} from 'react-native';
 import {Header, ListItem, Button, Avatar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Colors} from '../../Theme';
+import {Colors, HelperStyles} from '../../Theme';
 import {useDispatch, useSelector} from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import RNFS from 'react-native-fs';
@@ -72,7 +72,9 @@ function Favorities(props) {
       <Header
         backgroundColor={Colors.primary}
         // leftComponent={{icon: 'menu', color: '#fff'}}
-        centerComponent={{text: 'My Team', style: {color: '#fff'}}}
+        centerComponent={<Text style={HelperStyles.headerTitle}>Favorities</Text>}
+
+        // centerComponent={{text: 'My Team', style: {color: '#fff'}}}
         // rightComponent={{icon: 'Favorities', color: '#fff'}}
       />
       <SearchBar
@@ -86,9 +88,9 @@ function Favorities(props) {
           searchText !== ''
             ? contacts.filter(
                 person =>
-                  person.name.includes(searchText) && person.myTeam === true,
+                  person.name.includes(searchText) && person.favorited === true,
               )
-            : contacts.filter(person => person.myTeam === true)
+            : contacts.filter(person => person.favorited === true)
         }
         bounces={false}
         renderItem={({item}) => (
@@ -98,7 +100,7 @@ function Favorities(props) {
               roundAvatar
               onPress={() => onItemTap(item)}
               onLongPress={() => _onOpenActionSheet(item)}
-              title={item.name}
+              title={item.firstName +" "+ item.lastName}
               titleStyle={styles.title}
               subtitle={item.subtitle}
               subtitleStyle={styles.subtitle}
@@ -113,7 +115,7 @@ function Favorities(props) {
                     marginLeft: 0,
                   }}
                   rounded
-                  title={getNameId(item.name)}
+                  title={getNameId(item.firstName +" "+ item.lastName)}
                 />
               }
               //  bottomDivider

@@ -89,7 +89,11 @@ function DocumentDetail(props) {
             title={item.data}
             subtitle={item.id.name}
             leftAvatar={
-              <Icon name="file-pdf-o" size={30} />
+              <Image
+                    style={styles.pdfBg}
+                    source={require("../../Assets/pdfIcon.jpeg")}
+                  />
+              // <Icon name="file-pdf-o" size={30} />
               // <Image
               //   source={require('../../Assets/placeholder.jpeg')}
               //   style={styles.avatar}
@@ -135,5 +139,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 15,
     right: 15,
+  },pdfBg: {
+    height: 50,
+    width: 40,
+    borderRadius: 5,
+    // marginHorizontal: 10,
+    backgroundColor: Colors.primary,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

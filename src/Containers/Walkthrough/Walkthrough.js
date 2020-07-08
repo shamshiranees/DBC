@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width * data.length,
   },
   buttoncontainer: {
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.secondary,
     width: 250,
     height: 50,
     borderRadius: 10,

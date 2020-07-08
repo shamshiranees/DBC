@@ -27,7 +27,7 @@ import AppNavigator from './AppNavigator';
 import {Provider} from 'react-redux';
 import store from './Redux/store';
 
-const FONT = Platform.OS === 'ios' ? 'Avenir-Medium' : 'Roboto';
+const FONT = Platform.OS === 'ios' ? 'Gotham' : 'Gotham';
 const customTextInputProps = {
   style: {
     fontFamily: FONT,
@@ -39,6 +39,7 @@ const customTextProps = {
     fontFamily: FONT,
   },
 };
+console.disableYellowBox = true
 setCustomTextInput(customTextInputProps);
 setCustomText(customTextProps);
 function App() {

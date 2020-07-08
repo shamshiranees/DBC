@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 
+import com.calendarevents.CalendarEventsPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainPackageConfig;
 import com.facebook.react.shell.MainReactPackage;
@@ -91,7 +92,8 @@ public class PackageList {
       new SafeAreaContextPackage(),
       new RNScreensPackage(),
       new RNSharePackage(),
-      new VectorIconsPackage()
+      new VectorIconsPackage(),
+    new CalendarEventsPackage()
     ));
   }
 }

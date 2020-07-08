@@ -21,6 +21,7 @@ import {
   setContactDetails,
   setUrlDetails,
 } from "../../Redux/Actions";
+import moment from 'moment';
 import { useFocusEffect } from "@react-navigation/native";
 import { SearchBar } from "react-native-elements";
 import ActionSheet from "react-native-actionsheet";
@@ -28,6 +29,8 @@ import { getNameId } from "../../Utils/Validator";
 import CardView from "react-native-cardview";
 import Color from "../../Theme/Color";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import RNCalendarEvents from 'react-native-calendar-events';
+
 
 function Home(props) {
   const [searchText, setsearchText] = useState("");
@@ -40,11 +43,14 @@ function Home(props) {
   const tappedFloatButton = () => {
     dispatch(
       setContactDetails({
-        id: "",
-        name: "",
-        subtitle: "",
-        designation: "",
+        id: moment().unix(),
+        firstName: '',
+        lastName: '',
+        phoneNumber:'',
+        subtitle: '',
+        designation: '',
         myTeam: false,
+        favorited:false,
         businessCards: [],
         quotations: [],
         invoices: [],
@@ -67,8 +73,33 @@ function Home(props) {
     //     name: props.route.params.newFile,
     //   });
     // }
+    RNCalendarEvents.authorizeEventStore()
+    .then(status => {
+
+      console.log("Ssssssssaaaaa",status);
+      
+      // handle status
+    })
+    .catch(error => {
+     // handle error
+    });
+    // setEvent()
     getData();
+
   }, []);
+
+  const setEvent=()=>{
+
+    console.log("----",moment().add(1,'minutes').toISOString());
+    
+    RNCalendarEvents.saveEvent('Title of event', {
+      startDate: moment().add(1,'minutes').toISOString(),
+      endDate: moment().add(2,'minutes').toISOString(),
+      alarms: [{
+        date: moment().add(1,'minutes').toISOString()
+      }]
+    })
+  }
   sortWithHeader(contacts);
   const _onOpenActionSheet = (item) => {
     actionSheet.current.show();
@@ -158,7 +189,7 @@ function Home(props) {
                 roundAvatar
                 onPress={() => onItemTap(item)}
                 onLongPress={() => _onOpenActionSheet(item)}
-                title={item.name}
+                title={item.firstName + " "+ item.lastName}
                 titleStyle={styles.title}
                 subtitle={item.subtitle}
                 subtitleStyle={styles.subtitle}
@@ -166,13 +197,16 @@ function Home(props) {
                   <Avatar
                     containerStyle={{
                       backgroundColor: Colors.secondary,
-                      height: 46,
-                      width: 46,
-                      borderRadius: 23,
+                      // height: 46,
+                      // width: 46,
+                      // borderRadius: 23,
                       marginLeft: 25,
                     }}
                     rounded
-                    title={getNameId(item.name)}
+                    title={getNameId(item.firstName+" "+item.lastName)}
+                    size={46}
+                    titleStyle={{marginTop:7}}
+                    
                   />
                 }
                 //  bottomDivider
@@ -230,13 +264,13 @@ function getFirstLetterFrom(value) {
   return value.slice(0, 1).toUpperCase();
 }
 function sortWithHeader(values) {
-  values.sort((a, b) => a.name.localeCompare(b.name));
+  values.sort((a, b) => a.firstName.localeCompare(b.firstName));
   const newNames = values.reduce(function(list, data, index) {
     let listItem = list.find(
-      (item) => item.letter && item.letter === getFirstLetterFrom(data.name)
+      (item) => item.letter && item.letter === getFirstLetterFrom(data.firstName)
     );
     if (!listItem) {
-      list.push({ letter: getFirstLetterFrom(data.name), data: [data] });
+      list.push({ letter: getFirstLetterFrom(data.firstName), data: [data] });
     } else {
       listItem.data.push(data);
     }
