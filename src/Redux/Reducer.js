@@ -1,20 +1,6 @@
 const INITIAL_STATE = {
   contacts: [],
   newFileImport: '',
-  contactDetails: {
-    id: '',
-    firstName: '',
-    lastName: '',
-    phoneNumber:'',
-    subtitle: '',
-    designation: '',
-    favorited:false,
-    myTeam: false,
-    image: '',
-    quotation: '',
-    invoice: '',
-    document: '',
-  },
   contactDetail: {
     id: '',
     firstName: '',

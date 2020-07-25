@@ -5,7 +5,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.calendarevents.CalendarEventsPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainPackageConfig;
 import com.facebook.react.shell.MainReactPackage;
@@ -16,6 +15,10 @@ import java.util.ArrayList;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 // @react-native-community/masked-view
 import org.reactnative.maskedview.RNCMaskedViewPackage;
+// react-native-calendar-events
+import com.calendarevents.CalendarEventsPackage;
+// react-native-cardview
+import com.kishanjvaghela.cardview.RNCardViewPackage;
 // react-native-document-picker
 import io.github.elyx0.reactnativedocumentpicker.DocumentPickerPackage;
 // react-native-file-viewer
@@ -83,6 +86,8 @@ public class PackageList {
       new MainReactPackage(mConfig),
       new AsyncStoragePackage(),
       new RNCMaskedViewPackage(),
+      new CalendarEventsPackage(),
+      new RNCardViewPackage(),
       new DocumentPickerPackage(),
       new RNFileViewerPackage(),
       new RNFSPackage(),
@@ -92,8 +97,7 @@ public class PackageList {
       new SafeAreaContextPackage(),
       new RNScreensPackage(),
       new RNSharePackage(),
-      new VectorIconsPackage(),
-    new CalendarEventsPackage()
+      new VectorIconsPackage()
     ));
   }
 }

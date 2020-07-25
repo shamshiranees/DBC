@@ -13,6 +13,7 @@ import {
   Dimensions,
   FlatList,
   Modal,
+  Platform,
 } from "react-native";
 import FileViewer from "react-native-file-viewer";
 import { useSelector, useDispatch } from "react-redux";
@@ -122,6 +123,7 @@ console.log("girdtap",item);
       {console.log("reloadedddd")}
 
       <Header
+      containerStyle={{ paddingTop: 0, height: Dimensions.get('window').height * 0.1 }} 
         backgroundColor={Colors.primary}
         leftComponent={{
           icon: "chevron-left",
@@ -354,7 +356,7 @@ const styles = StyleSheet.create({
   avthrTitle: {
     fontSize: 36,
     fontWeight: "bold",
-    marginTop: 10,
+    marginTop: Platform.OS === 'ios'? 10:0,
   },
   pdfDetails: {
     overflow: "hidden",
@@ -519,10 +521,10 @@ export function CustomFlatList({ title, items, id, onReminderPress,isDetailList 
           renderItem={({ item }) => (
             <ListItem
               containerStyle={{ height: 80 }}
-              onPress={() => onImageTap(item)}
-              title={item}
+              onPress={() => onImageTap(item.name)}
+              title={item.name}
               titleStyle={styles.pdfName}
-              subtitle={"20/05/2020"}
+              subtitle={item.date}
               subtitleStyle={styles.pdfDate}
               rightElement={
                 <TouchableOpacity onPress={() => onReminderPress(item)}>
@@ -596,10 +598,10 @@ export function CustomFlatList({ title, items, id, onReminderPress,isDetailList 
            numColumns={3}
           bounces={false}
           renderItem={({ item }) => (<TouchableOpacity onPress={()=>props.onPress(item) }>
-         <CardView
+         {/* <CardView
           cardElevation={5}
           cardMaxElevation={5}
-          >
+          > */}
          
 <View style={{ flexDirection: "column",justifyContent:"center",alignItems:'center',borderRadius:6,marginHorizontal:5 ,paddingTop:0,marginVertical:10,width:(Dimensions.get('window').width/3)-20,height:(Dimensions.get('window').width/3)-20,backgroundColor:Colors.secondary}}>
                   {/* <Image
@@ -610,7 +612,7 @@ export function CustomFlatList({ title, items, id, onReminderPress,isDetailList 
                   <Icon name="file-text-o" size={25} color={Colors.white}/>
                   <Text style={styles.gridTitles}>{item.name}</Text>
                 </View>
-</CardView>   
+{/* </CardView>    */}
 
           </TouchableOpacity>
            

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, FlatList, Image, StyleSheet} from 'react-native';
+import {View, Text, FlatList, Image, StyleSheet, Dimensions} from 'react-native';
 import {Header, ListItem, Button, SearchBar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useSelector, useDispatch} from 'react-redux';
@@ -58,6 +58,7 @@ function DocumentDetail(props) {
   return (
     <View style={styles.container}>
       <Header
+      containerStyle={{ paddingTop: 0, height: Dimensions.get('window').height * 0.1 }} 
         backgroundColor={Colors.primary}
         // leftComponent={{icon: 'menu', color: '#fff'}}
         leftComponent={{
@@ -104,12 +105,12 @@ function DocumentDetail(props) {
         )}
         keyExtractor={item => item.id}
       />
-      <Button
+      {/* <Button
         buttonStyle={styles.button}
         icon={<Icon name="plus" size={25} color="white" />}
         containerStyle={styles.buttonContainer}
         onPress={tappedFloatButton}
-      />
+      /> */}
     </View>
   );
 }

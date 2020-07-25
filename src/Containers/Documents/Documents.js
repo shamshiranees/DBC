@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, FlatList, Image, StyleSheet} from 'react-native';
+import {View, Text, FlatList, Image, StyleSheet, Dimensions} from 'react-native';
 import {Header, ListItem, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Colors, HelperStyles} from '../../Theme';
@@ -36,6 +36,7 @@ function Document(props) {
   return (
     <View style={styles.container}>
       <Header
+      containerStyle={{ paddingTop: 0, height: Dimensions.get('window').height * 0.1 }} 
         backgroundColor={Colors.primary}
         centerComponent={<Text style={HelperStyles.headerTitle}>Document</Text>}
         // centerComponent={{text: 'Document', style: {color: '#fff'}}}

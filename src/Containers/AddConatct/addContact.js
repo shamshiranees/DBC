@@ -15,7 +15,6 @@ import {
   Header,
   ListItem,
   Button,
-  Input,
   CheckBox,
   Card,
 } from 'react-native-elements';
@@ -38,15 +37,14 @@ import {isFileValid} from '../../Utils/Validator';
 import ActionSheet from 'react-native-actionsheet';
 import CardView from 'react-native-cardview';
 import { updateContact } from '../../Utils/LocalStorage';
-
+import Input from 'react-native-floating-label-text-input';
 function addContact(props) {
   const isEdit = props.route.params ? props.route.params.isEdit : false;
 
   const dispatch = useDispatch();
   const dbcStore = useSelector(cont => cont);
+  
   const removeFile = (name, header, type) => {
-    console.log('ddd', header);
-
     onFileViewerClosed(name, header, type);
   };
 
@@ -63,8 +61,11 @@ function addContact(props) {
       // console.log('oooooo', fileValid);
 
       // if (fileValid) {
+        var path = RNFS.TemporaryDirectoryPath;
+     
+        
       await FileViewer.open(res.uri, {
-        onDismiss: () => onFileViewerClosed(res.name, selectionType, 'add'),
+        onDismiss: () => onFileViewerClosed({name:res.name,path:res.uri,date:moment().format('L')}, selectionType, 'add'),
       });
       // } else {
       //   alert(contactId);
@@ -89,13 +90,12 @@ function addContact(props) {
         allValue = dbcStore.contactDetail.businessCards.concat([fileName]);
       } else {
         allValue = dbcStore.contactDetail.businessCards.filter(
-          item => item !== res,
+          item => item.name !== res.name,
         );
       }
       dispatch(
         setContactDetails({
           ...dbcStore.contactDetail,
-          id: moment().unix(),
           businessCards: allValue,
         }),
       );
@@ -105,13 +105,12 @@ function addContact(props) {
         allValue = dbcStore.contactDetail.quotations.concat([fileName]);
       } else {
         allValue = dbcStore.contactDetail.quotations.filter(
-          item => item !== res,
+          item => item.name !== res.name,
         );
       }
       dispatch(
         setContactDetails({
           ...dbcStore.contactDetail,
-          id: moment().unix(),
           quotations: allValue,
         }),
       );
@@ -120,12 +119,11 @@ function addContact(props) {
       if (type === 'add') {
         allValue = dbcStore.contactDetail.invoices.concat([fileName]);
       } else {
-        allValue = dbcStore.contactDetail.invoices.filter(item => item !== res);
+        allValue = dbcStore.contactDetail.invoices.filter(item => item.name !== res.name);
       }
       dispatch(
         setContactDetails({
           ...dbcStore.contactDetail,
-          id: moment().unix(),
           invoices: allValue,
         }),
       );
@@ -135,13 +133,12 @@ function addContact(props) {
         allValue = dbcStore.contactDetail.documents.concat([fileName]);
       } else {
         allValue = dbcStore.contactDetail.documents.filter(
-          item => item !== res,
+          item => item.name !== res.name,
         );
       }
       dispatch(
         setContactDetails({
           ...dbcStore.contactDetail,
-          id: moment().unix(),
           documents: allValue,
         }),
       );
@@ -150,79 +147,72 @@ function addContact(props) {
   const saveContact = () => {
     var rnfsPromises = [];
     var path = `${RNFS.DocumentDirectoryPath}/dbcFiles/`;
-    var tmpPath =
-      Platform.OS === 'ios'
-        ? `${
-            RNFS.TemporaryDirectoryPath
-          }/org.reactjs.native.shamshir.DBC-Inbox/`
-        : `${RNFS.DocumentDirectoryPath}`;
 
-     if (isEdit) {
-       console.log("iseditttt trueeee");
-       
+     if (isEdit) {  
       const jsonValue = dbcStore.contactDetail;
-      //  updateContact(jsonValue.id,jsonValue)
-      // const jsonValue = dbcStore.contactDetails;
-      var allContacts = dbcStore.contacts;
+      var allContacts = JSON.parse(JSON.stringify(dbcStore.contacts));
       
-      for (var i = 0; i < allContacts.length; i++) {
-        let item = allContacts[i];
+
+
+     var NewContacts = dbcStore.contacts.filter(
+        item => item.id !== jsonValue.id,
+      );
+      // for (var i = 0; i < allContacts.length; i++) {
+      //   let item = allContacts[i];
        
-        if (item.id === jsonValue.id) {
+      //   if (item.id === jsonValue.id) {
           
           
-          allContacts[i] = jsonValue;
-        }
-      }
-   console.log("allcontacts",allContacts);
+      //     allContacts[i] = jsonValue;
+      //   }
+      // }
    
 
-     AsyncStorage.setItem('allContacts', JSON.stringify(allContacts));
-       dispatch(setContact(JSON.parse(JSON.stringify(allContacts))));
-       return props.navigation.goBack();
+     AsyncStorage.setItem('allContacts', JSON.stringify(NewContacts));
+       dispatch(setContact(JSON.parse(JSON.stringify(NewContacts))));
+      //  return props.navigation.goBack();
      }
     if (dbcStore.contactDetail.businessCards.length > 0) {
       for (var i = 0; i < dbcStore.contactDetail.businessCards.length; i++) {
         const item = dbcStore.contactDetail.businessCards[i];
-        const itemName = `${dbcStore.contactDetail.id}_${item}`;
+        const itemName = `${dbcStore.contactDetail.id}_${item.name}`;
 
         rnfsPromises.push(
-          RNFS.moveFile(`${tmpPath}${item}`, `${path}${itemName}`),
+          RNFS.moveFile(item.path, `${path}${itemName}`),
         );
       }
     }
     if (dbcStore.contactDetail.quotations.length > 0) {
       for (var i = 0; i < dbcStore.contactDetail.quotations.length; i++) {
         const item = dbcStore.contactDetail.quotations[i];
-        const itemName = `${dbcStore.contactDetail.id}_${item}`;
+        const itemName = `${dbcStore.contactDetail.id}_${item.name}`;
 
         rnfsPromises.push(
-          RNFS.moveFile(`${tmpPath}${item}`, `${path}${itemName}`),
+          RNFS.moveFile(item.path, `${path}${itemName}`),
         );
       }
     }
     if (dbcStore.contactDetail.invoices.length > 0) {
       for (var i = 0; i < dbcStore.contactDetail.invoices.length; i++) {
         const item = dbcStore.contactDetail.invoices[i];
-        const itemName = `${dbcStore.contactDetail.id}_${item}`;
+        const itemName = `${dbcStore.contactDetail.id}_${item.name}`;
 
         rnfsPromises.push(
-          RNFS.moveFile(`${tmpPath}${item}`, `${path}${itemName}`),
+          RNFS.moveFile(item.path, `${path}${itemName}`),
         );
       }
     }
     if (dbcStore.contactDetail.documents.length > 0) {
       for (var i = 0; i < dbcStore.contactDetail.documents.length; i++) {
         const item = dbcStore.contactDetail.documents[i];
-        const itemName = `${dbcStore.contactDetail.id}_${item}`;
+        const itemName = `${dbcStore.contactDetail.id}_${item.name}`;
 
         rnfsPromises.push(
-          RNFS.moveFile(`${tmpPath}${item}`, `${path}${itemName}`),
+          RNFS.moveFile(item.path, `${path}${itemName}`),
         );
       }
     }
 
-    console.log('pathhhh', path);
     RNFS.mkdir(path)
       .then(success => {
         Promise.all(rnfsPromises)
@@ -248,7 +238,6 @@ function addContact(props) {
               // props.navigation.navigate('Home');
             });
             props.navigation.goBack();
-            console.log('FILE WRITTEN!');
           })
           .catch(err => {
             console.log(err.message);
@@ -264,6 +253,7 @@ function addContact(props) {
   return (
     <View style={{height:'100%',backgroundColor:Colors.white}}>
       <Header
+      containerStyle={{ paddingTop: 0, height: Dimensions.get('window').height * 0.1 }} 
         backgroundColor={Colors.primary}
         leftComponent={{
           icon: 'chevron-left',
@@ -280,11 +270,14 @@ function addContact(props) {
 
       <ScrollView style={styles.scrollView} bounces={false}>
         <View style={styles.conatiner}>
+        
           <Input
-            labelStyle={styles.label}
-            inputContainerStyle={styles.inputContainer}
-            label="First Name"
-            onChangeText={value =>
+            // labelStyle={styles.label}
+             containerStyles={styles.inputContainer}
+             value={dbcStore.contactDetail.firstName}
+             
+             placeholder="First Name"
+             onChangeTextValue={value =>
               dispatch(
                 setContactDetails({
                   ...dbcStore.contactDetail,
@@ -292,13 +285,11 @@ function addContact(props) {
                 }),
               )
             }
-            value={dbcStore.contactDetail.firstName}
           />
             <Input
-            labelStyle={styles.label}
-            inputContainerStyle={styles.inputContainer}
-            label="Last Name"
-            onChangeText={value =>
+           containerStyles={styles.inputContainer}
+           placeholder="Last Name"
+           onChangeTextValue={value =>
               dispatch(
                 setContactDetails({
                   ...dbcStore.contactDetail,
@@ -310,9 +301,9 @@ function addContact(props) {
           />
           <Input
             labelStyle={styles.label}
-            inputContainerStyle={styles.inputDescriptionContainer}
-            label="Company"
-            onChangeText={value =>
+            containerStyles={styles.inputContainer}
+            placeholder="Company"
+            onChangeTextValue={value =>
               dispatch(
                 setContactDetails({
                   ...dbcStore.contactDetail,
@@ -324,9 +315,10 @@ function addContact(props) {
           />
           <Input
               labelStyle={styles.label}
-              inputContainerStyle={styles.inputDescriptionContainer}
-              label="Phone Number"
-              onChangeText={value =>
+              placeholder="Mobile Number"
+              keyboardType="number-pad"
+              containerStyles={styles.inputContainer}
+              onChangeTextValue={value =>
                 dispatch(
                   setContactDetails({
                     ...dbcStore.contactDetail,
@@ -339,9 +331,9 @@ function addContact(props) {
           
             <Input
               labelStyle={styles.label}
-              inputContainerStyle={styles.inputDescriptionContainer}
-              label="Designation"
-              onChangeText={value =>
+              containerStyles={styles.inputContainer}
+              placeholder="Designation"
+              onChangeTextValue={value =>
                 dispatch(
                   setContactDetails({
                     ...dbcStore.contactDetail,
@@ -352,7 +344,7 @@ function addContact(props) {
               value={dbcStore.contactDetail.designation}
             />
              <CheckBox
-            containerStyle={styles.checkbox}
+            containerStyles={styles.inputContainer}
             title="My team"
             checked={dbcStore.contactDetail.myTeam}
             onPress={() =>
@@ -411,16 +403,10 @@ export default addContact;
 function CustomFlatList({title, items, id, selectFile, removeFile, isEdit}) {
   const actionSheet = useRef();
   const [selectedFile, setselectedFile] = useState('');
-  const filePath =
-    Platform.OS === 'ios'
-      ? `${RNFS.TemporaryDirectoryPath}/org.reactjs.native.shamshir.DBC-Inbox/`
-      : `${RNFS.DocumentDirectoryPath}`;
-  const path = `${RNFS.DocumentDirectoryPath}/dbcFiles/`;
-  const optionSelected = async (index, item) => {
+  
+  const optionSelected =  (index, item) => {
     if (index === 0) {
-      console.log(selectedFile);
-
-      await FileViewer.open(isEdit ? path : filePath + item);
+        FileViewer.open(isEdit ? `${RNFS.DocumentDirectoryPath}/dbcFiles/${id}_${item.name}` :  item.path);
     } else if (index === 1) {
       removeFile(item, title, 'remove');
     }
@@ -480,9 +466,9 @@ function CustomFlatList({title, items, id, selectFile, removeFile, isEdit}) {
             <ListItem
             containerStyle={{ height: 80 }}
            onPress={() => onFileTap(item)}
-           title={item}
+           title={item.name}
            titleStyle={styles.pdfName}
-           subtitle={"20/05/2020"}
+           subtitle={item.date}
            subtitleStyle={styles.pdfDate}
           //  rightAvatar={<><Icon name={'bell'} size={10} color={Colors.grey} />
           //  <Text style={{fontSize:10,color:Colors.grey,marginLeft:3}}>Reminder</Text></>}
@@ -497,6 +483,8 @@ function CustomFlatList({title, items, id, selectFile, removeFile, isEdit}) {
                 cancelButtonIndex={2}
                 destructiveButtonIndex={1}
                 onPress={index => {
+                  console.log("Sssssssssss")
+                  
                   optionSelected(index, item);
                 }}
               />
@@ -522,7 +510,7 @@ function CustomFlatList({title, items, id, selectFile, removeFile, isEdit}) {
 }
 const styles = StyleSheet.create({
   conatiner: {
-    marginVertical: 20,backgroundColor:Colors.white,height:'100%'
+    marginVertical: 20,backgroundColor:Colors.white,height:'100%',paddingHorizontal:10
     // margin: 20,
   },
   selectedImage: {width: 100, height: 100, marginLeft: 8.0},
@@ -542,10 +530,12 @@ const styles = StyleSheet.create({
     color: Colors.grey,
   },
   inputContainer: {
-    borderRadius: 6,
-    borderColor: Colors.grey,
+   // borderRadius: 6,
+   borderWidth:0,
+borderBottomWidth:0.5,
+borderBottomColor: Colors.grey,
     height: 45,
-    borderWidth: 0.5,
+    marginVertical:5,
     paddingLeft: 7.0,
   },
   inputDescriptionContainer: {
@@ -578,7 +568,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {color: Colors.white, fontSize: 13, fontWeight: 'bold',marginLeft:10},
  card: {
-    margin: 15
+    marginVertical: 15
     // borderRadius: 15,
     // padding: 0,
     // shadowColor: '#000',

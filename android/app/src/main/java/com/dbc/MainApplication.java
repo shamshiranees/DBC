@@ -2,6 +2,8 @@ package com.dbc;
 
 import android.app.Application;
 import android.content.Context;
+
+import com.calendarevents.CalendarEventsPackage;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -27,7 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
-//           packages.add(new RNFileViewerPackage());
+//           packages.add(new CalendarEventsPackage());
           return packages;
         }
 

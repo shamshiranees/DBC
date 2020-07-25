@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, FlatList, Image, StyleSheet, Linking} from 'react-native';
+import {View, Text, FlatList, Image, StyleSheet, Linking, Dimensions} from 'react-native';
 import {Header, ListItem, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Colors, HelperStyles} from '../../Theme';
@@ -59,6 +59,7 @@ function More(props) {
   return (
     <View>
       <Header
+      containerStyle={{ paddingTop: 0, height: Dimensions.get('window').height * 0.1 }} 
         backgroundColor={Colors.primary}
         // leftComponent={{icon: 'menu', color: '#fff'}}
         centerComponent={<Text style={HelperStyles.headerTitle}>More</Text>}

@@ -77,11 +77,11 @@ function AppNavigator() {
   const dispatch = useDispatch();
   useEffect(() => {
 
-    AppState.addEventListener('change', _handleAppStateChange);
+    // AppState.addEventListener('change', _handleAppStateChange);
 
-    return () => {
-      AppState.removeEventListener('change', _handleAppStateChange);
-    };
+    // return () => {
+    //   AppState.removeEventListener('change', _handleAppStateChange);
+    // };
 
   }, []);
 

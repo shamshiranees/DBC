@@ -1,6 +1,6 @@
 import React, {useEffect, useCallback, useState, useRef} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, FlatList, Image, StyleSheet, Platform} from 'react-native';
+import {View, Text, FlatList, Image, StyleSheet, Platform, Dimensions} from 'react-native';
 import {Header, ListItem, Button, Avatar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Colors, HelperStyles} from '../../Theme';
@@ -70,6 +70,7 @@ function Favorities(props) {
   return (
     <View style={styles.container}>
       <Header
+      containerStyle={{ paddingTop: 0, height: Dimensions.get('window').height * 0.1 }} 
         backgroundColor={Colors.primary}
         // leftComponent={{icon: 'menu', color: '#fff'}}
         centerComponent={<Text style={HelperStyles.headerTitle}>Favorities</Text>}
@@ -88,7 +89,7 @@ function Favorities(props) {
           searchText !== ''
             ? contacts.filter(
                 person =>
-                  person.name.includes(searchText) && person.favorited === true,
+                  person.firstName.includes(searchText) && person.favorited === true,
               )
             : contacts.filter(person => person.favorited === true)
         }

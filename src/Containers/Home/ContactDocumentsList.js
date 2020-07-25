@@ -6,7 +6,7 @@ import DatePicker from "react-native-datepicker";
 import moment from "moment";
 import RNCalendarEvents from "react-native-calendar-events";
 import { useSelector } from 'react-redux';
-import { View, Modal, Text, StyleSheet } from 'react-native';
+import { View, Modal, Text, StyleSheet, Dimensions } from 'react-native';
 import { Button,Header, Input, } from 'react-native-elements';
 
 import { HelperStyles,Colors } from '../../Theme';
@@ -50,6 +50,7 @@ function ContactDocumentsList(props) {
 
 
 <Header
+containerStyle={{ paddingTop: 0, height: Dimensions.get('window').height * 0.1 }} 
         backgroundColor={Colors.primary}
         leftComponent={{
           icon: "chevron-left",

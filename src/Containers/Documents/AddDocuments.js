@@ -15,7 +15,7 @@ import {
 } from '../../Redux/Actions';
 import {isFileValid} from '../../Utils/Validator';
 import RNPickerSelect from 'react-native-picker-select';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import {Header} from 'react-native-elements';
 import {Colors} from '../../Theme';
 
@@ -176,6 +176,7 @@ function AddDocuments(props) {
   return (
     <View>
       <Header
+      containerStyle={{ paddingTop: 0, height: Dimensions.get('window').height * 0.1 }} 
         backgroundColor={Colors.primary}
         leftComponent={{
           icon: 'chevron-left',

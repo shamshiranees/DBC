@@ -35,10 +35,12 @@ import RNCalendarEvents from 'react-native-calendar-events';
 function Home(props) {
   const [searchText, setsearchText] = useState("");
   const path = RNFS.DocumentDirectoryPath + "/dbcFiles/";
-  const actionSheet = useRef();
+  const actionSheetHome = useRef();
   const sectionListRef = useRef();
   // const dispatch = useDispatch();
   const contacts = useSelector((cont) => cont.contacts);
+  const contactDetails = useSelector((cont) => cont.contactDetail);
+
   const dispatch = useDispatch();
   const tappedFloatButton = () => {
     dispatch(
@@ -64,8 +66,17 @@ function Home(props) {
     if (index == 0) {
       props.navigation.navigate("addContact", { isEdit: true });
     } else {
+      let allValue = [];
+     
+        allValue = contacts.filter(
+          item => item.id !== contactDetails.id
+        );
+        dispatch(setContact(allValue))
+
+        AsyncStorage.setItem('allContacts', JSON.stringify(allValue ));
+
     }
-    console.log(index);
+    
   };
   useEffect(() => {
     // if (props.route.params != undefined) {
@@ -102,8 +113,12 @@ function Home(props) {
   }
   sortWithHeader(contacts);
   const _onOpenActionSheet = (item) => {
-    actionSheet.current.show();
+
+    console.log("ssssssss",item);
+    
     dispatch(setContactDetails(item));
+    actionSheetHome.current.show();
+   
     dispatch(
       setUrlDetails({
         imageUrl: path + item.image,
@@ -148,7 +163,8 @@ function Home(props) {
   };
   return (
     <View style={styles.container}>
-      <Header
+      <Header 
+      containerStyle={{ paddingTop: 0, height: Dimensions.get('window').height * 0.1 }} 
         backgroundColor={Colors.primary}
         // leftComponent={{icon: 'menu', color: '#fff'}}
         centerComponent={<Text style={HelperStyles.headerTitle}>Home</Text>}
@@ -177,7 +193,7 @@ function Home(props) {
           sections={
             searchText != ""
               ? sortWithHeader(
-                  contacts.filter((person) => person.name.includes(searchText))
+                  contacts.filter((person) => person.firstName.includes(searchText))
                 )
               : sortWithHeader(contacts)
           }
@@ -187,12 +203,14 @@ function Home(props) {
               <ListItem
                 containerStyle={{ height: 60 }}
                 roundAvatar
+                underlayColor={'transparent'}
                 onPress={() => onItemTap(item)}
                 onLongPress={() => _onOpenActionSheet(item)}
                 title={item.firstName + " "+ item.lastName}
                 titleStyle={styles.title}
                 subtitle={item.subtitle}
                 subtitleStyle={styles.subtitle}
+                
                 leftAvatar={
                   <Avatar
                     containerStyle={{
@@ -205,7 +223,7 @@ function Home(props) {
                     rounded
                     title={getNameId(item.firstName+" "+item.lastName)}
                     size={46}
-                    titleStyle={{marginTop:7}}
+                    titleStyle={{marginTop:Platform.OS === 'ios'? 7:0}}
                     
                   />
                 }
@@ -222,14 +240,14 @@ function Home(props) {
           contentContainerStyle={{
             width: 40,
             backgroundColor: Colors.white,
-            marginTop: 50,marginRight:5
+            marginTop: 0,marginRight:5
           }}
           data={alphabetsArray}
           bounces={false}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <TouchableWithoutFeedback onPress={() => onAphabetTap(item)}>
-              <Text style={{ width: 40, textTransform: "uppercase",textAlign:"right" ,fontWeight:"bold",color:Colors.darkGrey}}>
+              <Text style={{ width: 40, textTransform: "uppercase",textAlign:"right" ,fontWeight:"bold",color:Colors.darkGrey,height:(Dimensions.get('window').height-200)/26}}>
                 {item}
               </Text>
             </TouchableWithoutFeedback>
@@ -240,11 +258,13 @@ function Home(props) {
       <Button
         buttonStyle={styles.button}
         icon={<Icon name="plus" size={25} color="white" />}
+        raised
+        type="solid"
         containerStyle={styles.buttonContainer}
         onPress={() => tappedFloatButton("new")}
       />
       <ActionSheet
-        ref={actionSheet}
+        ref={actionSheetHome}
         title={"Choose any one option"}
         options={["Edit", "Delete", "cancel"]}
         cancelButtonIndex={2}
@@ -300,21 +320,20 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   button: {
-    width: 70,
-    height: 70,
-    borderRadius: 35,
-    right: 0,
+    width: 50,
+    height: 50,
+    // borderRadius: 35,
+    // right: 0,
     backgroundColor: Colors.secondary,
-    shadowColor: "rgba(0,0,0, .4)", // IOS
-    shadowOffset: { height: 1, width: 1 }, // IOS
-    shadowOpacity: 1, // IOS
-    shadowRadius: 5, //IOS
-    elevation: 2, // Android
+     // Android
   },
   buttonContainer: {
     position: "absolute",
     bottom: 15,
-    right: 15,
+    right: 30,
+    borderRadius: 35,
+   
+   
   },
   container: { flex: 1 },
 });
